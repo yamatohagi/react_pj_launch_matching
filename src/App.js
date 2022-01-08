@@ -1,17 +1,18 @@
 import "./App.css";
 import * as React from "react";
-import Create from "./Create";
+import Create from "./view/Create";
 import { BrowserRouter, Route } from "react-router-dom";
-import page1 from "./components/page1";
+import Result from "./components/Result";
 
 function App() {
+
   return (
     <form>
       <div className="App">
         <BrowserRouter>
             <div>
             <Route exact path="/" component={Create} />
-            <Route exact path="/about" component={page1} />
+            <Route exact path="/result" component={Result} />
           </div>
         </BrowserRouter>
       </div>

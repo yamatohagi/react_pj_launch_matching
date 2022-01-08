@@ -3,12 +3,14 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 
-class page1 extends React.Component {   //page1クラスにReact.Componentを継承する
 
-    render() {                          //画面表示の為のrenderメソッドを定義する
+class page1 extends React.Component {
+
+    render() {
+
         return (
             <div>
-                HelloPage1!!!
+                マッチング結果は＝＝＝＝です。
 
                     <Link to={`/`}>Go To index</Link>
 

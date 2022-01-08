@@ -1,5 +1,5 @@
-import logo from "./logo.svg";
-import "./App.css";
+import logo from "../logo.svg";
+import "../App.css";
 import { TextField, Button, Box, Fab, Stack, LinearProgress, ButtonGroup, Grid } from "@mui/material";
 import * as React from "react";
 import ReactDOM from "react-dom";
@@ -8,11 +8,12 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 
-import Header from "./components/Header";
+import Header from "../components/Header";
+import CircularProgress from "@mui/material/CircularProgress";
 
 
-import page1 from "./components/page1"; //作成したpage1.jsを読み込んでいる
-import { Link } from "react-router-dom";
+import { Link,withRouter } from "react-router-dom";
+
 
 function Create() {
   const ButtonRoot = React.forwardRef(function ButtonRoot(props, ref) {
@@ -29,7 +30,9 @@ function Create() {
     );
   });
 
+
   const [value, setValue] = React.useState(new Date());
+
 
   return (
     <form>
@@ -44,9 +47,6 @@ function Create() {
             </div>
           </div>
           <Grid item container>
-
-
-
             <Grid sm={2} />
             <Grid xs={12} sm={8}>
               <div style={{ height: 100 }}>
@@ -93,8 +93,15 @@ function Create() {
             },
           }}
         ></Box>
-        <Button
+
+        <Box id="load-status" style={{ visibility: "hidden" }} sx={{ width: "100%" }}>
+          <LinearProgress />
+        </Box>
+        <br></br>
+        <Button id="submit-button"
           onClick={() => {
+            document.getElementById("submit-button").style.visibility = "hidden";
+            document.getElementById("load-status").style.visibility = "visible";
             console.log(document.getElementById("name").value);
             const url = "https://jsonplaceholder.typicode.com/posts/";
             const requestOptions = {
@@ -111,7 +118,6 @@ function Create() {
               .then((response) => response.json())
               .then((responseJson) => {
                 console.log(responseJson);
-                this.history.pushState(null, '/about');
               });
           }}
           variant="contained"
@@ -120,7 +126,8 @@ function Create() {
         >
           Go!! lunch!!
         </Button>
-        <Link to={`/about`}>Go To page2</Link>
+        <br></br>
+        <Link to={{ pathname: '/result', state: { foo: 'bar'} }}>My route</Link>
       </div>
     </form>
   );
