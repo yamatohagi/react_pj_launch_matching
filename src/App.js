@@ -9,6 +9,8 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 
 import Header from "./components/Header";
+import About from "./components/About";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const ButtonRoot = React.forwardRef(function ButtonRoot(props, ref) {
@@ -28,7 +30,7 @@ function App() {
   const [value, setValue] = React.useState(new Date());
 
   return (
-    <form method="post" action="https://jsonplaceholder.typicode.com/posts/">
+    <form>
       <div className="App">
         <Header />
         <Grid container direction="column">
@@ -40,6 +42,14 @@ function App() {
             </div>
           </div>
           <Grid item container>
+            <Router>
+              <Switch>
+                <Route exact path="/"></Route>
+                <Route path="/about">
+                  <About />
+                </Route>
+              </Switch>
+            </Router>
             <Grid sm={2} />
             <Grid xs={12} sm={8}>
               <div style={{ height: 100 }}>
@@ -55,7 +65,7 @@ function App() {
                 {/* <TextField required id="standard-required" label="希望日" variant="standard" /> */}
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DateTimePicker
-                    renderInput={(props) => <TextField name="date-time" {...props} />}
+                    renderInput={(props) => <TextField name="date-time" id="date-time" {...props} />}
                     label="開始時間(〜1時間)"
                     value={value}
                     onChange={(newValue) => {
@@ -88,11 +98,27 @@ function App() {
         ></Box>
         <Button
           onClick={() => {
-            console.log("clicked");
+            console.log(document.getElementById("name").value);
+            const url = "https://jsonplaceholder.typicode.com/posts/";
+            const requestOptions = {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                Name: document.getElementById("name").value,
+                Mail: document.getElementById("mail-address").value,
+                DepartmentName: document.getElementById("department-name").value,
+                DateTime: document.getElementById("date-time").value,
+              }),
+            };
+            fetch(url, requestOptions)
+              .then((response) => response.json())
+              .then((responseJson) => {
+                console.log(responseJson);
+              });
           }}
           variant="contained"
           color="primary"
-          type="submit"
+          // type="submit"
         >
           Go!! lunch!!
         </Button>
