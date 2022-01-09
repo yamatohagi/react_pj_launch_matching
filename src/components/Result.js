@@ -1,22 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
+function Result() {
+  const { state } = useLocation();
+  console.log(state);
+  var str = JSON.stringify(state);
 
-
-class page1 extends React.Component {
-
-    render() {
-
-        return (
-            <div>
-                マッチング結果は＝＝＝＝です。
-
-                    <Link to={`/`}>Go To index</Link>
-
-            </div>
-        );
-    }
+  return <div>Hello, {str}</div>;
 }
 
-export default page1;                   //page1を出力する為に必要
+export default Result;

@@ -1,38 +1,23 @@
-import logo from "../logo.svg";
-import "../App.css";
-import { TextField, Button, Box, Fab, Stack, LinearProgress, ButtonGroup, Grid } from "@mui/material";
 import * as React from "react";
-import ReactDOM from "react-dom";
-
+import "../App.css";
+import { TextField, Button, Box, LinearProgress, Grid } from "@mui/material";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
-
+import ButtonUnstyled, { buttonUnstyledClasses } from "@mui/base/ButtonUnstyled";
 import Header from "../components/Header";
-import CircularProgress from "@mui/material/CircularProgress";
-
-
-import { Link,withRouter } from "react-router-dom";
-
+import { Link, useHistory } from "react-router-dom";
+import CustomButtonRoot from "../components/CustomButtonRoot";
 
 function Create() {
-  const ButtonRoot = React.forwardRef(function ButtonRoot(props, ref) {
-    const { children, ...other } = props;
-
-    return (
-      <svg width="150" height="50" {...other} ref={ref}>
-        <polygon points="0,50 0,0 150,0 150,50" className="bg" />
-        <polygon points="0,50 0,0 150,0 150,50" className="borderEffect" />
-        <foreignObject x="0" y="0" width="150" height="50">
-          <div className="content">{children}</div>
-        </foreignObject>
-      </svg>
-    );
-  });
-
+  const history = useHistory();
+  const onClickSection = (responseJson) => history.push({ pathname: "/result", state: responseJson });
 
   const [value, setValue] = React.useState(new Date());
 
+  const SvgButton = React.forwardRef(function SvgButton(props, ref) {
+    return <ButtonUnstyled {...props} component={CustomButtonRoot} ref={ref} />;
+  });
 
   return (
     <form>
@@ -75,34 +60,16 @@ function Create() {
             <Grid sm={2} />
           </Grid>
         </Grid>
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
-        ></Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            "& > *": {
-              m: 1,
-            },
-          }}
-        ></Box>
-
         <Box id="load-status" style={{ visibility: "hidden" }} sx={{ width: "100%" }}>
           <LinearProgress />
         </Box>
         <br></br>
-        <Button id="submit-button"
+        <SvgButton
+          type="submit"
+          id="submit-button"
           onClick={() => {
             document.getElementById("submit-button").style.visibility = "hidden";
             document.getElementById("load-status").style.visibility = "visible";
-            console.log(document.getElementById("name").value);
             const url = "https://jsonplaceholder.typicode.com/posts/";
             const requestOptions = {
               method: "POST",
@@ -117,20 +84,15 @@ function Create() {
             fetch(url, requestOptions)
               .then((response) => response.json())
               .then((responseJson) => {
-                console.log(responseJson);
+                onClickSection(responseJson);
               });
           }}
-          variant="contained"
-          color="primary"
-          // type="submit"
         >
           Go!! lunch!!
-        </Button>
+        </SvgButton>
         <br></br>
-        <Link to={{ pathname: '/result', state: { foo: 'bar'} }}>My route</Link>
       </div>
     </form>
   );
 }
-
 export default Create;
