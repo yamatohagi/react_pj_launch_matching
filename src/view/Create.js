@@ -122,7 +122,7 @@ function Create() {
         </Box>
         <br></br>
         <Button
-          type="submit"
+
           id="submit-button"
           variant="contained"
           color="primary"
