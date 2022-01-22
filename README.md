@@ -2,10 +2,17 @@
  
 
 ### API Server
+#### django shell
 ```
 cd Lunch_Mate
 pipenv shell
+```
+
+#### migrate DB and run server
+```
 pipenv install
+pip install django
+pip install python-dateutil 
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
