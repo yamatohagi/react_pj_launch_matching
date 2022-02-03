@@ -1,0 +1,5 @@
+// Action
+{
+  type: "UpdateStateA",
+  testStateA
+}

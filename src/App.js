@@ -2,20 +2,15 @@ import "./App.css";
 import * as React from "react";
 import Create from "./view/Create";
 import { BrowserRouter, Route } from "react-router-dom";
-import Result from "./components/Result";
-
+import Result from "./view/Result";
+import Home from "./view/Home";
 function App() {
   return (
-    <form>
-      <div className="App">
         <BrowserRouter>
-          <div>
             <Route exact path="/" component={Create} />
             <Route exact path="/result" component={Result} />
-          </div>
+            <Route exact path="/home" component={Home} />
         </BrowserRouter>
-      </div>
-    </form>
   );
 }
 export default App;

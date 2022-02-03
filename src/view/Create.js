@@ -6,15 +6,33 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import Header from "../components/Header";
 import { Link, useHistory } from "react-router-dom";
+import Result from "../view/Result";
+import { createStore } from "redux";
+import { Provider } from "react-redux"
+import store from '../store/index'
+import { useSelector } from "react-redux";
+import { testFunctionA } from "../store/ActionCreator";
+
 
 import Validation from "../components/Validation";
 
 function Create() {
+
+
+  const count1 = useSelector((state) => state.count);
+  const mapStateToProps = (count1) => {
+    return {
+    }
+  }
+  // dispatch(testFunctionA());
   const history = useHistory();
-  const onClickSection = (responseJson) => history.push({ pathname: "/result", state: responseJson });
+  // const onClickSection = (responseJson) => history.push({ pathname: "/result", state: responseJson });
+  const onClickSection = (responseJson) => setCount(1);
 
   const [value, setValue] = React.useState(new Date());
 
+  const [count, setCount] = useState(0);
+  const [response, setResponse] = useState();
 
   const state = {
     info: {
@@ -97,8 +115,7 @@ function Create() {
                 />
               </div>
               <div style={{ height: 100 }}>
-                <TextField style={{ width: 260 }}
-                required id="department-name" name="department-name" label="事業部" variant="standard" />
+                <TextField style={{ width: 260 }} required id="department-name" name="department-name" label="事業部" variant="standard" />
               </div>
               <div style={{ height: 100 }}>
                 {/* <TextField required id="standard-required" label="希望日" variant="standard" /> */}
@@ -122,7 +139,6 @@ function Create() {
         </Box>
         <br></br>
         <Button
-
           id="submit-button"
           variant="contained"
           color="primary"
@@ -146,6 +162,7 @@ function Create() {
                 .then((response) => response.json())
                 .then((responseJson) => {
                   onClickSection(responseJson);
+                  setResponse(responseJson);
                 });
             } else {
             }
@@ -153,6 +170,8 @@ function Create() {
         >
           Go!! lunch!!
         </Button>
+        {count === 1 ? <Result /> : ""}
+        <div>Countコンポーネント:{count1}</div>
         <br></br>
       </div>
     </form>
