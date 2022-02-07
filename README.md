@@ -4,7 +4,7 @@
 ### API Server
 #### django shell
 ```
-cd LunchMate
+cd Lunch_Mate
 pipenv shell
 ```
 
