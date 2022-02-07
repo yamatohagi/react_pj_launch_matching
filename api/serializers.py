@@ -1,7 +1,12 @@
 from rest_framework import serializers
-from .models import Entry
+from .models import Member, MatchEntry
 
-class EntrySerializer(serializers.ModelSerializer):
+class MemberSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = Entry
+		model = Member
+		fields ='__all__'
+
+class MatchEntrySerializer(serializers.ModelSerializer):
+	class Meta:
+		model = MatchEntry
 		fields ='__all__'
