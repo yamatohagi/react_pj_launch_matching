@@ -4,7 +4,7 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
 
-function Result() {
+function NotMatching() {
   const { response } = useLocation();
   console.log(response);
   var str = JSON.stringify(response);
@@ -24,8 +24,8 @@ function Result() {
       <br></br>
       <div>
         <Alert sx={{ borderRadius: 1, mx: "auto", width: 400,textAlign: 'center', }} severity="success">
-          <AlertTitle >マッチング</AlertTitle>
-          相手にメッセージを送ってみましょう — <strong>check it out!</strong>
+          <AlertTitle >登録しました。</AlertTitle>
+          確認する — <strong>check it out!</strong>
         </Alert>
       </div>
 
@@ -34,4 +34,4 @@ function Result() {
   );
 }
 
-export default Result;
+export default NotMatching;

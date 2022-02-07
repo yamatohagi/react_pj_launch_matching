@@ -16,7 +16,7 @@ import { testFunctionA } from "../store/ActionCreator";
 
 import Validation from "../components/Validation";
 
-function Create() {
+const Create = (props) => {
 
 
   const count1 = useSelector((state) => state.count);
@@ -27,12 +27,17 @@ function Create() {
   // dispatch(testFunctionA());
   const history = useHistory();
   // const onClickSection = (responseJson) => history.push({ pathname: "/result", state: responseJson });
-  const onClickSection = (responseJson) => setCount(1);
+  const onClickSection = (responseJson) => props.datahoge(responseJson);
 
   const [value, setValue] = React.useState(new Date());
 
-  const [count, setCount] = useState(0);
+
   const [response, setResponse] = useState();
+
+
+  function clickButton() {
+    return props();
+  }
 
   const state = {
     info: {
@@ -73,33 +78,17 @@ function Create() {
   return (
     <form>
       <div className="App">
-        <Header />
         <Grid container direction="column">
           <Grid style={{ height: 100 }} item></Grid>
           <div class="demo demo7">
             <div class="heading">
               <span class="title">IBJ Launch Match</span>
-              <span class="caption">ランチに行ける日を登録</span>
+              <span class="caption">登録</span>
             </div>
           </div>
           <Grid item container>
             <Grid sm={2} />
             <Grid xs={12} sm={8}>
-              <div style={{ height: 100 }}>
-                <TextField
-                  style={{ width: 260 }}
-                  error={values.message.email}
-                  helperText={values.message.email}
-                  required
-                  id="mail-address"
-                  type="email"
-                  name="email"
-                  value={values.info.email}
-                  label="メールアドレス"
-                  variant="standard"
-                  onChange={(event) => handleChange(event)}
-                />
-              </div>
               <div style={{ height: 100 }}>
                 <TextField
                   error={values.message.name}
@@ -170,7 +159,7 @@ function Create() {
         >
           Go!! lunch!!
         </Button>
-        {count === 1 ? <Result /> : ""}
+
         <div>Countコンポーネント:{count1}</div>
         <br></br>
       </div>
