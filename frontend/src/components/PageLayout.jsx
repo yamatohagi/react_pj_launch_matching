@@ -19,12 +19,16 @@ export const PageLayout = (props) => {
 
     return (
         <>
-            <Navbar bg="primary" variant="dark">
-                <a className="navbar-brand" href="/">IBJランチマッチ</a>
-                { isAuthenticated ? <SignOutButton /> : <SignInButton /> }
-            </Navbar>
-            <br />
-            <br />
+            { isAuthenticated ?
+                <>
+                    <Navbar bg="primary" variant="dark">
+                        <a className="navbar-brand" href="/">IBJ昼マッチ</a>
+                        <SignOutButton /> 
+                    </Navbar>
+                    <br/><br/>
+                </>
+            : null }
+            
             {props.children}
         </>
     );

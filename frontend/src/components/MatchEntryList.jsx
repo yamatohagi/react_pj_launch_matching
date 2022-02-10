@@ -2,11 +2,12 @@ import React from 'react'
 function MatchEntryList({matchEntry}){
 	const DisplayData=matchEntry.map(
 		(info, i)=>{
+		
 			return(
 				<tr key={i}>
-					<td>{info.id}</td>
-					<td>{info.expected_date}</td>
-					<td>{info.partner_member_id}</td>
+					<td>{info.lunch_date}</td>
+					<td>{info.partner_name}</td>
+					<td>{info.partner_dept}</td>
 				</tr>
 			)
 		}
@@ -17,9 +18,9 @@ function MatchEntryList({matchEntry}){
 			<table className="table table-striped">
 				<thead>
 					<tr>
-					<th>Id</th>
 					<th>希望日</th>
-					<th>相手ID</th>
+					<th>名前</th>
+					<th>部署</th>
 					</tr>
 				</thead>
 				<tbody>

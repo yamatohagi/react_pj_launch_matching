@@ -16,9 +16,9 @@ export const SignInButton = () => {
             });     }
     return (
         <>
-            <Button className="ml-auto" variant="secondary" onClick={() => handleLogin()}>
-                Sign In
-            </Button>
+            <button className={'appbtn'} onClick={() => handleLogin()}>
+                 <span>ログイン</span> 
+            </button>
         </>
     )
 }

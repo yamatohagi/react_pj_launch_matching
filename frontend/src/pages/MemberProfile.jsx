@@ -11,6 +11,7 @@ import MatchEntryList from "../components/MatchEntryList"
 
 export const MemberProfile = ({memberData}) => {
   const [member, setMember] = useState(null);
+  const [partnerMember, setPartnerMember] = useState(null);
   const [matchEntry, setMatchEntry] = useState(null);
   const [editMember, setEditMember] = useState(false);
   const [matchTime, setMatchTime] = useState(new Date());
@@ -29,6 +30,13 @@ export const MemberProfile = ({memberData}) => {
     
   }, []);  
 
+  useEffect(() => {
+    if (partnerMember != null || partnerMember != undefined) {
+      alert(Object.values(partnerMember))
+    }
+  }, [partnerMember])
+  
+
   const handleEditButton = () => {
     setEditMember(!editMember)
   }
@@ -40,6 +48,7 @@ export const MemberProfile = ({memberData}) => {
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson)
+        setPartnerMember(responseJson)
       }); 
     } catch {
       console.log("eroor")
