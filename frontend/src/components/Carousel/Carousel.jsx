@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Slide from './Slide/Slide'
 import './Carousel.css';
-import pic from '../../assets/lunch_banner.jpg';
+import banner1 from '../../assets/lunch_banner1.jpeg';
+import banner2 from '../../assets/lunch_banner2.jpeg';
+import banner3 from '../../assets/lunch_banner3.jpg';
+import banner2Extra from '../../assets/lunch_banner2_extra.png';
 
 const Carousel = (props) => {
   const [timeduration] = useState(4000)
@@ -12,22 +15,22 @@ const Carousel = (props) => {
     {
       subtitle: "昼間のランチ相手探すのは大変？",
       title: "マッチしてみたら!",
-      img: 'https://images.unsplash.com/photo-1494859802809-d069c3b71a8a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bHVuY2h8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60',
+      img: banner1,
       position: 1,
       class: 'left',
     },
     {
       subtitle: "IBJ昼マッチ",
       title: "いろんな文化のランチ楽しめる",
-      img: 'https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGx1bmNofGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
+      img: banner2,
       position: 2,
-      img2: 'http://assets.stickpng.com/thumbs/5af16e2c6554160a79bea007.png',
+      img2: banner2Extra,
       class: 'leftimg',
     },
     {
-      title: '社内ネットワークひろ展開',
+      title: '社内ネットワーク展開',
       subtitle: '知らない同僚と仲良くなろう',
-      img: pic,
+      img: banner3,
       position: 3,
       class: 'center',
     }
