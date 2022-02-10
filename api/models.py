@@ -22,4 +22,4 @@ class Member(models.Model):
 class MatchEntry(models.Model):
   member_id = models.IntegerField(default=0, blank=False)
   expected_date = models.DateTimeField(default=datetime.now)
-  partner_member_id = models.ForeignKey(Member, on_delete=models.CASCADE, null=True)
+  partner_member_id = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True)

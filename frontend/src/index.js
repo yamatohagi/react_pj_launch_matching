@@ -12,7 +12,7 @@ import { msalConfig } from "./util/authConfig";
  * We recommend initializing this outside of your root component to ensure it is not re-initialized on re-renders
  */
 const msalInstance = new PublicClientApplication(msalConfig);
-
+// moment.locale('ja');
 /**
  * We recommend wrapping most or all of your components in the MsalProvider component. It's best to render the MsalProvider as close to the root as possible.
  */

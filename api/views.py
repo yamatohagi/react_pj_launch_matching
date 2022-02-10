@@ -1,16 +1,15 @@
-from django.shortcuts import render
-from django.http import JsonResponse
-from datetime import date, datetime, timedelta
 from dateutil.parser import parse
 from random import choice  
-import logging
+from django.utils.timezone import localtime
+from django.db.models import Q
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import MemberSerializer, MatchEntrySerializer
-
 from .models import Member, MatchEntry
-# Create your views here.
+
+import logging
+
 logger = logging.getLogger(__name__)
 
 @api_view(['GET'])
@@ -24,46 +23,8 @@ def apiOverview(request):
 
 	return Response(api_urls)
 
-# @api_view(['GET'])
-# def entryList(request):
-# 	tasks = Entry.objects.all().order_by('-id')
-# 	serializer = EntrySerializer(tasks, many=True)
-# 	return Response(serializer.data)
-
-# @api_view(['GET'])
-# def entryDetail(request, pk):
-# 	tasks = Entry.objects.get(id=pk)
-# 	serializer = EntrySerializer(tasks, many=False)
-# 	return Response(serializer.data)
-
-# @api_view(['POST'])
-# def createEntry(request):
-# 	data = request.data
-# 	data['expected_date'] = parse(data['expected_date'])
-
-# 	serializer = EntrySerializer(data=data)
-# 	if serializer.is_valid():
-# 		serializer.save()
-
-# 	return Response(serializer.data)
-
-# @api_view(['DELETE'])
-# def deleteEntry(request, pk):
-# 	task = Entry.objects.get(id=pk)
-# 	task.delete()
-
-# 	return Response('Item succsesfully delete!')
-
-# @api_view(['POST'])
-# def searchClosestEntry(request):
-# 	logger.error(request.data['expected_date'])
-# 	expected_date = parse(request.data['expected_date'])
-# 	start = expected_date + timedelta(-5)
-# 	end = expected_date + timedelta(5)
-# 	tasks = choice(Entry.objects.filter(expected_date__range=(start, end)).exclude(mail=request.data['mail']))
-# 	serializer = EntrySerializer(tasks, many=False)
-# 	return Response(serializer.data)
-
+# -----------------------------------------------------------------
+# 会員情報・会員登録
 # -----------------------------------------------------------------
 @api_view(['POST'])
 def setGetMember(request):
@@ -79,7 +40,9 @@ def setGetMember(request):
 	logger.error(serializer.data)
 	return Response(serializer.data)
 
-
+# -----------------------------------------------------------------
+# 会員情報更新
+# -----------------------------------------------------------------
 @api_view(['POST'])
 def updateMember(request):
 	member = Member.objects.get(id=request.data['id'])
@@ -90,37 +53,74 @@ def updateMember(request):
 
 	return Response(serializer.data)
 
+# -----------------------------------------------------------------
+# マッチ登録
+# -----------------------------------------------------------------
 @api_view(['POST'])
 def newMatch(request):
-	serializer = MatchEntrySerializer(data=request.data)
+	expected_date = parse(request.data['expected_date'])
+	start = localtime(expected_date).replace(hour=0, minute=0, second=0, microsecond=0)
+	end = localtime(expected_date).replace(hour=23, minute=59, second=59, microsecond=59)
+	match_data = {}
+	match_list = MatchEntry.objects.filter(Q(expected_date__range=(start, end)) & Q(partner_member_id__isnull=True)).exclude(member_id=request.data['member_id'])
 
-	if serializer.is_valid():
-		serializer.save()
+	if match_list.count() == 0:
+		serializer = MatchEntrySerializer(data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+		match_data = {
+			'match_success': False
+		}
+	else:
+		match = choice(match_list)
+		serializer = MatchEntrySerializer(match, data={'partner_member_id': request.data['member_id']})
+		if serializer.is_valid():
+			serializer.save()
+		member = Member.objects.get(id=match.member_id)
+		match_data = {
+			'match_success': True,
+			'match_date': match.expected_date,
+			'partner_mail': member.mail,
+			'partner_name': member.name,
+			'partner_dept': member.dept,
 
-	return Response(serializer.data)
+		}
 
+	return Response(match_data)
+
+# -----------------------------------------------------------------
+# マッチ履歴
+# -----------------------------------------------------------------
 @api_view(['GET'])
 def memberMatchList(request, pk):
-	# entries = MatchingEntry.objects.all().order_by('-id')
-	entries = MatchEntry.objects.select_related('partner_member_id').all()
-	
-	serializer = MatchEntrySerializer(entries, many=True)
-	logger.error("0")
-	logger.error("0")
-	logger.error("0")
-	logger.error("0")
-	logger.error("0")
-	logger.error("0")
-	logger.error(entries.query)
-	logger.error(serializer.data)
-	logger.error("0")
-	logger.error("0")
-	logger.error("0")
-	logger.error("0")
-	logger.error("0")
-	logger.error("0")
-	logger.error("0")
-	return Response(serializer.data)
+	entries = MatchEntry.objects.select_related('partner_member_id').filter(Q(member_id=pk) | Q(partner_member_id=pk))
+	entry_data = []
+
+	for obj in entries:
+		if obj.partner_member_id is None:
+			data = {
+				'lunch_date': obj.expected_date,
+			}
+		else:
+			if int(obj.member_id) == int(pk):
+				data = {
+					'lunch_date': obj.expected_date,
+					'partner_mail': obj.partner_member_id.mail,
+					'partner_name': obj.partner_member_id.name,
+					'partner_dept': obj.partner_member_id.dept,
+				}
+			else:
+				member = Member.objects.get(id=obj.member_id)
+				data = {
+					'lunch_date': obj.expected_date,
+					'partner_mail': member.mail,
+					'partner_name': member.name,
+					'partner_dept': member.dept,
+				}
+
+		entry_data.append(data)
+
+	return Response(entry_data)
 
 
 

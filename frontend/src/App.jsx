@@ -6,6 +6,7 @@ import { ProfileData } from "./components/ProfileData";
 import { callMsGraph } from "./api/graph";
 import { MemberProfile } from "./pages/MemberProfile"
 import Button from "react-bootstrap/Button";
+import Carousel from "./components/Carousel/Carousel"
 import "./styles/App.css";
 
 /**
@@ -52,7 +53,7 @@ const MainContent = () => {
             </AuthenticatedTemplate>
 
             <UnauthenticatedTemplate>
-                <h5 className="card-title">Please sign-in to see your profile information.</h5>
+                <Carousel/>
             </UnauthenticatedTemplate>
         </div>
     );
