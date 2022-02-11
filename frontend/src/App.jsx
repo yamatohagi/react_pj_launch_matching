@@ -5,6 +5,7 @@ import { PageLayout } from "./components/PageLayout";
 import { ProfileData } from "./components/ProfileData";
 import { callMsGraph } from "./api/graph";
 import { MemberProfile } from "./pages/MemberProfile"
+import { FullWidthTabs } from "./pages/Tabs"
 import Button from "react-bootstrap/Button";
 import Carousel from "./components/Carousel/Carousel"
 import "./styles/App.css";
@@ -33,8 +34,8 @@ const ProfileContent = () => {
     return (
         <>
             {graphData ? 
-                // <ProfileData graphData={graphData} />
-                <MemberProfile memberData={graphData}/>
+                <FullWidthTabs memberData={graphData}/>
+                // <MemberProfile memberData={graphData}/>
                 :
                 <Button variant="secondary" onClick={RequestProfileData}>Request Profile Information</Button>
             }

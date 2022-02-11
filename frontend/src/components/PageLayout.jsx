@@ -25,7 +25,6 @@ export const PageLayout = (props) => {
                         <a className="navbar-brand" href="/">IBJ昼マッチ</a>
                         <SignOutButton /> 
                     </Navbar>
-                    <br/><br/>
                 </>
             : null }
             

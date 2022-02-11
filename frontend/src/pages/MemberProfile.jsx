@@ -63,17 +63,7 @@ export const MemberProfile = ({memberData}) => {
           setMatchEntry(responseJson)
         });
   }
-
-  const Entries = () => {
-    matchEntry.map((entry) => {
-      console.log(entry)
-      return(
-      
-      <p>{entry.id}</p>
-      )
-    })
-  }
-
+  
   return (
     <>
     {
