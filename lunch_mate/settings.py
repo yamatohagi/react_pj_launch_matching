@@ -25,7 +25,9 @@ SECRET_KEY = '-c1cg^-j%2l-e_-(0+ey030&yvz@^k$x@%w0pwgm#of%)qrqe+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "https://lunch-matching.ibjapan.jp"
+]
 
 
 # Application definition
@@ -40,7 +42,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'rest_framework',
     'corsheaders',
-
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -143,13 +145,11 @@ STATICFILES_DIRS = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-
     "http://localhost:3000",
-
+    "https://lunch-matching.ibjapan.jp"
 ]
 
 CORS_ALLOWED_ORIGINS = [
-
     "http://localhost:3000",
-
+    "https://lunch-matching.ibjapan.jp"
 ]

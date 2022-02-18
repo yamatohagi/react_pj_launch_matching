@@ -4,6 +4,7 @@
  */
 
 import { LogLevel } from "@azure/msal-browser";
+import { FRONT_LINK } from "./environmentConfig"
 
 /**
  * Configuration object to be passed to MSAL instance on creation. 
@@ -14,7 +15,7 @@ export const msalConfig = {
     auth: {
         clientId: "cfb0ea16-d74c-46df-809e-9a800b6faeb7",
         authority: "https://login.microsoftonline.com/common",
-        redirectUri: "http://localhost:3000/"
+        redirectUri: FRONT_LINK
     },
     cache: {
         cacheLocation: "sessionStorage", // This configures where your cache will be stored

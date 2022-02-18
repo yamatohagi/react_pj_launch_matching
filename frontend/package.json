@@ -34,6 +34,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-prod": "NODE_ENV=production react-scripts start",
     "build": "react-scripts build"
   },
   "browserslist": {
