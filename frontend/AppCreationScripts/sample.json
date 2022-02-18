@@ -12,8 +12,8 @@
         "Id": "spa",
         "Name": "ms-identity-javascript-react-spa",
         "Kind" :  "SinglePageApplication",
-        "HomePage": "http://localhost:3000/",
-        "ReplyUrls":"http://localhost:3000/",
+        "HomePage": "https://lunch-matching.ibjapan.jp/",
+        "ReplyUrls":"https://lunch-matching.ibjapan.jp/",
         "Audience": "AzureADandPersonalMicrosoftAccount",
         "RequiredResourcesAccess": [
           {
