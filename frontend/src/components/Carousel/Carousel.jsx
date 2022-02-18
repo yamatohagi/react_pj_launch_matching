@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Slide from './Slide/Slide'
 import './Carousel.css';
-import banner1 from '../../assets/lunch_banner1.jpeg';
-import banner2 from '../../assets/lunch_banner2.jpeg';
+import banner1 from '../../assets/lunch_banner1.jpg';
+import banner2 from '../../assets/lunch_banner2.jpg';
 import banner3 from '../../assets/lunch_banner3.jpg';
 import banner2Extra from '../../assets/lunch_banner2_extra.png';
 
