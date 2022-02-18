@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getCookie } from "../util/cookie";
+import { API_LINK } from "../util/environmentConfig"
 
 export const newMatch = (id, matchTime) => {
-  const url = "http://127.0.0.1:8000/api/new-match/";
+  const url = `${API_LINK}/api/new-match/`;
   
   const requestOptions = {
     method: "POST",
@@ -17,7 +18,7 @@ export const newMatch = (id, matchTime) => {
 }
 
 export const matchingEntryList = (memberId) => {
-  const url = `http://127.0.0.1:8000/api/member-match-list/${memberId}/`;
+  const url = `${API_LINK}/api/member-match-list/${memberId}/`;
   
   const requestOptions = {
     method: "GET",
