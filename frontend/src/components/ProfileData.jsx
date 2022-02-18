@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 /**
  * Renders information about the user obtained from MS Graph
- * @param props 
+ * @param props
  */
 export const ProfileData = ({ member, handleEditButton }) => {
 
@@ -12,7 +12,7 @@ export const ProfileData = ({ member, handleEditButton }) => {
             <p><strong>dept: </strong> {member.dept}</p>
             <p><strong>Email: </strong> {member.mail}</p>
             <p><strong>Id: </strong> {member.id}</p>
-            <Button variant="secondary" onClick={handleEditButton()}>Edit</Button>
+            <Button variant="secondary" color="primary" onClick={handleEditButton()}>Edit</Button>
         </div>
     );
 };

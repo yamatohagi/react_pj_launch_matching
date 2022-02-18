@@ -8,7 +8,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
-import Result from "../components/TabComponents/Result";
+import TrueMatching from "../components/TabComponents/TrueMatching";
 import NotMatching from "../components/TabComponents/NotMatching";
 import CustomizedTables from "../components/TabComponents/CustomizedTables";
 import { TextField, Button, Box, LinearProgress, Grid } from "@mui/material";
@@ -72,34 +72,46 @@ export const FullWidthTabs = ({memberData}) => {
       .then((response) => response.json())
       .then((responseJson) => {
         setMember(responseJson)
+        matchingEntryList(responseJson['id'])
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log(responseJson)
+          setMatchEntry(responseJson)
+        });
       });
-     
+
     } catch {
       console.log("eroor")
     }
-    
-  }, []);  
 
-  useEffect(() => {
+  }, []);
+
+  useEffect(() => {//これは？？？変わったタイミングで走る？
     if (partnerMember != null || partnerMember != undefined) {
-      alert(Object.values(partnerMember))
+      if (Object.values(partnerMember)[0] == false) {
+        setResultCount(2)
+      }else if(Object.values(partnerMember)[0] == true){
+
+      }
+
     }
+
   }, [partnerMember])
-  
+
 
   const handleEditButton = () => {
     setEditMember(!editMember)
   }
 
   const handleMatchTimeInsert = () => {
-    console.log("1234")
+    console.log("122222334")
     try {
       newMatch(member.id, matchTime)
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson)
         setPartnerMember(responseJson)
-      }); 
+      });
     } catch {
       console.log("eroor")
     }
@@ -118,7 +130,7 @@ export const FullWidthTabs = ({memberData}) => {
   // ステファンコード
   // ＝＝＝＝＝＝＝＝
 
-  const [count, setCount] = useState(2);
+  const [result_count, setResultCount] = useState(0);
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
@@ -134,7 +146,7 @@ export const FullWidthTabs = ({memberData}) => {
   }
 
   const init_rows = [
-    createData('骨皮　スネ夫', '2022/02/05', 0),
+    createData('骨皮　bbbスネ夫', '2022/02/05', 0),
     createData('ドラえもん', '2022/02/03', 0),
     createData('さいたま', '2022/02/06', 0),
     createData('社長', '2022/02/06', 0),
@@ -154,7 +166,7 @@ export const FullWidthTabs = ({memberData}) => {
 
   const dateInput = (input) => {
     setRows([
-      createData('dddd', '2022/02/05', 0),
+      createData('dddddssssddd', '2022/02/05', 0),
       createData('ドラえもん', '2022/02/03', 0),
       createData('さいたま', '2022/02/06', 0),
       createData('社長', '2022/02/06', 0),
@@ -193,15 +205,9 @@ export const FullWidthTabs = ({memberData}) => {
       </AppBar>
       <SwipeableViews axis={theme.direction === "rtl" ? "x-reverse" : "x"} index={value} onChangeIndex={handleChangeIndex}>
         <TabPanel value={value} index={0} dir={theme.direction}>
-          {/* <Create datahoge={(input) => { hogeFunc(input) }}/> */}
-          <DateInput function={() => { dateInput() }}/>
-          {count === 1 ? <Result /> : ""}
-          {count === 2 ? <NotMatching /> : ""}
-
-          {/* ステファンコード Start*/}
-          <br/><br/><br/><br/>
-          参考👇
           <br/><br/>
+          {result_count === 2 ? <NotMatching /> : ""}
+          {result_count === 1 ? <TrueMatching /> : ""}
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
               renderInput={(props) => <TextField name="date-time" id="date-time" {...props} />}
@@ -222,19 +228,8 @@ export const FullWidthTabs = ({memberData}) => {
           {/* ステファンコード End*/}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <CustomizedTables value={rows}/>
-          {/* ステファンコード Start*/}
-          <br/><br/><br/><br/>
-          参考👇
-          <br/><br/>
-          <Button
-            id="submit-button"
-            variant="contained"
-            color="primary"
-            size="large"
-            onClick={handleEntryListButton}
-            >履歴
-          </Button><br/><br/><br/>
+
+
           {
             matchEntry ? (
               <MatchEntryList matchEntry={matchEntry}/>
@@ -243,10 +238,9 @@ export const FullWidthTabs = ({memberData}) => {
           {/* ステファンコード End*/}
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <DivisionView value={division} function={(input) => { divisionChange(input) }}/>
+          {/* <DivisionView value={division} function={(input) => { divisionChange(input) }}/> */}
           {/* ステファンコード Start*/}
-          <br/><br/><br/><br/>
-          参考👇
+
           <br/><br/>
           {
             editMember ? (

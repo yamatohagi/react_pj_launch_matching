@@ -16,15 +16,12 @@ function NotMatching() {
 
   return (
     <div className="App">
-      <br></br>
       <div>
         <Alert sx={{ borderRadius: 1, mx: "auto", width: 400,textAlign: 'center', }} severity="success">
           <AlertTitle >登録しました。</AlertTitle>
-          確認する — <strong>check it out!</strong>
         </Alert>
       </div>
-
-      <div>Hello,</div>
+      <br></br>
     </div>
   );
 }

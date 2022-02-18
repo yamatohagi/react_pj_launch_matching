@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import { updateMember } from "../api/memberApi";
 
 export const MemberEdit = ({ member, handleEditButton }) => {
+  console.log('iiiii');
+  console.log(member);
+  console.log('iiiii');
     const [name, setName] = useState(member.name);
     const [dept, setDept] = useState(member.dept);
 
@@ -12,7 +15,7 @@ export const MemberEdit = ({ member, handleEditButton }) => {
             .then((responseJson) => {
               console.log(responseJson)
             });
-           
+
           } catch {
             console.log("eroor")
           }
@@ -36,7 +39,7 @@ export const MemberEdit = ({ member, handleEditButton }) => {
         <input type="text" value={name} onChange={handleNameChange} />
         </label>
         <br/>
-        
+
         <label>
         Dept:
         <input type="text" value={dept} onChange={handleDeptChange} />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 
-function Result() {
+function TrueMatching() {
 
   useEffect(() => {
     const scriptAlert = document.createElement("script");
@@ -24,10 +24,9 @@ function Result() {
           相手にメッセージを送ってみましょう — <strong>check it out!</strong>
         </Alert>
       </div>
-
-      <div>Hello, </div>
+      <br></br>
     </div>
   );
 }
 
-export default Result;
+export default TrueMatching;
