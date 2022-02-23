@@ -1,6 +1,6 @@
 import React from "react";
 import { useMsal } from "@azure/msal-react";
-import Button from 'react-bootstrap/Button';
+import { Button } from "@mui/material";
 
 /**
  * Renders a sign-out button
@@ -16,8 +16,8 @@ export const SignOutButton = () => {
     }
     return (
         <>
-        <Button className="ml-auto" variant="secondary" onClick={() => handleLogout()}>
-            Sign Out
+        <Button variant="contained" color="primary" size="large" className="ml-auto" onClick={() => handleLogout()}>
+            ログアウト
         </Button>
         </>
     )
