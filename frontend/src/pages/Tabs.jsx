@@ -144,7 +144,7 @@ export const FullWidthTabs = ({ memberData }) => {
               <br />
               {
                 partnerMember != null || partnerMember != undefined ?
-                  (matched ? <TrueMatching /> : <TrueMatching />) : null
+                  (matched ? <TrueMatching /> : <NotMatching />) : null
               }
             </Card>
           </Container>
