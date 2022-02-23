@@ -43,7 +43,7 @@ function MatchEntryList({ matchEntry }) {
   });
 
   return (
-    <Container sx="padding-right: 0px;padding-left: 0px;">
+    <Container sx="margin-bottom: 10%;padding-right: 0px;padding-left: 0px;">
       <Card sx={"margin-top: 5%"}>
         <Table>
           <TableContainer component={Paper}>

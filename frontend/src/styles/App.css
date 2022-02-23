@@ -18,12 +18,59 @@
 .css-1werely-MuiTabs-indicator {
   border-radius: 110px 110px 110px 110px;
   position: absolute;
-  height: 4px;
+  height: 6px;
   bottom: 0px;
   width: 1px;
   -webkit-transition: all 300ms cubic-bezier(0.6, 0, 0.2, 1) 0ms;
   transition: all 500ms cubic-bezier(0.6, 0, 0.2, 1) 0ms;
   background-color: #00AB55;
+}
+.css-1vb58bp-MuiPaper-root-MuiAlert-root {
+  background-color: #fff;
+  color: #212B36;
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 8px;
+  box-shadow: none;
+  background-image: none;
+  line-height: 1.5714285714285714;
+  font-size: 0.875rem;
+  font-family: Public Sans,sans-serif;
+  font-weight: 600;
+  background-color: #ff3476c4;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px 16px;
+  color: #fff;
+  box-shadow: 0 8px 16px 0 rgba(171, 0, 66, 0.24);
+}
+.bg-primary {
+  background-color: #1aa0ff!important;
+}
+.css-3uz2bs-MuiPaper-root-MuiAlert-root {
+  background-color: #fff;
+  color: #212B36;
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 8px;
+  box-shadow: none;
+  background-image: none;
+  line-height: 1.5714285714285714;
+  font-size: 0.875rem;
+  font-family: Public Sans,sans-serif;
+  font-weight: 600;
+  background-color: #00aa55;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px 16px;
+  color: #fff;
+  box-shadow: 0 8px 16px 0 rgba(0, 171, 85, 0.24);
+  width: 70%;
+  margin-left: 15%;
 }
 .App-header {
   background-color: #282c34;

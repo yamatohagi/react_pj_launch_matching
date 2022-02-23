@@ -16,12 +16,12 @@ function TrueMatching() {
     <div className="App">
       <br></br>
       <div>
-        <Alert sx={{ padding: 5,margin: 3,textAlign: 'center' }} severity="success">
-          <AlertTitle >マッチング</AlertTitle>
-          相手にメッセージを送ってみましょう — <strong>check it out!</strong>
-        </Alert>
+      <Alert variant="filled" severity="success">
+        　マッチングしました！！！！　　
+        履歴から相手を確認して、メッセージを送ってみましょう。
+      </Alert>
       </div>
-      <br></br>
+
     </div>
   );
 }

@@ -14,9 +14,9 @@ function NotMatching() {
   return (
     <div className="App">
       <div>
-        <Alert sx={{ padding: 4,margin: 3,textAlign: 'center' }} severity="success">
-          <AlertTitle sx={{textAlign: 'center'}} >登録しました。</AlertTitle>
-        </Alert>
+      <Alert variant="filled" severity="info">
+        登録しました。
+      </Alert>
       </div>
       <br></br>
     </div>

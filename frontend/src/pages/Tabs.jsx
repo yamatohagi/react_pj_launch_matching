@@ -37,7 +37,7 @@ export const FullWidthTabs = ({ memberData }) => {
   const [value, setValue] = React.useState(0);
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
-    
+
     return (
       <div role="tabpanel" hidden={value !== index} id={`full-width-tabpanel-${index}`} aria-labelledby={`full-width-tab-${index}`} {...other}>
         {value === index && (
@@ -57,7 +57,7 @@ export const FullWidthTabs = ({ memberData }) => {
 
 
   useEffect(() => {
-    
+
     try {
       setGetMember(memberData["displayName"], memberData["mail"])
         .then((response) => response.json())
@@ -67,11 +67,13 @@ export const FullWidthTabs = ({ memberData }) => {
             matchingEntryList(responseJson["id"])
               .then((response) => response.json())
               .then((responseJson) => {
-                console.log('loadした時');
                 setMatchEntry(responseJson);
               });
           }
         });
+        if(value != 0){
+          setPartnerMember(null);
+        };
     } catch {
       console.log("eroor");
     }
@@ -138,9 +140,11 @@ export const FullWidthTabs = ({ memberData }) => {
               </Button>
               <br />
               <br />
+              <br />
+              <br />
               {
-                partnerMember != null || partnerMember != undefined ? 
-                  (matched ? <TrueMatching /> : <NotMatching />) : null
+                partnerMember != null || partnerMember != undefined ?
+                  (matched ? <TrueMatching /> : <TrueMatching />) : null
               }
             </Card>
           </Container>
