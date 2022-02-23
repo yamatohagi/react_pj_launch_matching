@@ -10,12 +10,17 @@
   transition: all 0.3s;
   display: flex;
   align-items: center;
-  padding-left: 10%;
 }
 .slidetitles {
   display: flex;
   flex-direction: column;
-  gap: 15px
+  gap: 15px;
+  text-shadow: 0px 0px 10px white;
+}
+
+.white-text {
+ color: white;
+ text-shadow: 0px 0px 10px black;
 }
 
 .slides .slide.active {
@@ -56,25 +61,27 @@
 .slide button {
   flex-direction: row-reverse;
 }
-.slide .appbtn i {
-  margin-left: 10px
+.slide .appbtn {
+  margin: 5px 10px;
 }
-.slide .appbtn:hover i {
-margin-left: 20px
+.slide .appbtn:hover {
+  margin: 5px 0px;
+  transform: translateY(10px);
 }
 .pause i:hover {
   color: var(--theme-color)
 }
 .leftimg {
   display: flex;
-  gap: 10px
+  gap: 10px;
+  padding-bottom: 3%;
 }
 .leftimg .slidecont .slidetitles {
   flex-direction: column-reverse
 }
 .leftimg .img2 {
   width: 50%;
-  height: 80%;
+  height: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,11 +116,14 @@ margin-left: 20px
 }
 .appbtn {
   padding: 10px;
-  background-color: #222;
+  background-color: #00AB55;
   color: #fff;
   display: flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgb(0 171 85 / 24%);
 }
 .reverse {
   flex-direction: row-reverse;
@@ -127,7 +137,7 @@ margin-left: 20px
 }
 
 .appbtn:hover {
-  background-color: #333
+  background-color: #00AB55
 }
 .logincont .googlebtn{
   background-color: #dd4b39;
@@ -172,10 +182,26 @@ margin-left: 20px
   color: #fff;
   border: solid 1px transparent
 }
-.appbtn:disabled {
-  cursor: no-drop;
+
+.slidebackground {
+  object-fit: cover;
 }
-.appbtn.hide {
-  opacity: 0;
-  pointer-events: none
+.left {
+  padding-left: 20%;
+}
+
+@media only screen and (max-width: 768px) {
+  .slides .slide {
+    padding-left: 0;
+    flex-direction: column;
+  }
+  .slidecont {
+    margin: 10px;
+  }
+  .leftimg .img2 {
+    margin-top: 50px;
+  }
+  .left {
+    padding-top: 70%;
+  }
 }

@@ -1,7 +1,7 @@
 from dateutil.parser import parse
 from random import choice  
 from django.utils.timezone import localtime
-from django.db.models import Q
+from django.db.models import Q, Count
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -93,7 +93,8 @@ def newMatch(request):
 # -----------------------------------------------------------------
 @api_view(['GET'])
 def memberMatchList(request, pk):
-	entries = MatchEntry.objects.select_related('partner_member_id').filter(Q(member_id=pk) | Q(partner_member_id=pk))
+	entries = MatchEntry.objects.select_related('partner_member_id').filter(Q(member_id=pk) | Q(partner_member_id=pk)).annotate(null_count=Count('partner_member_id')).order_by('null_count', '-expected_date')
+	entry_data = []
 	entry_data = []
 
 	for obj in entries:

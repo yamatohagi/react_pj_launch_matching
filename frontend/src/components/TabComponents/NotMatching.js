@@ -7,24 +7,18 @@ function NotMatching() {
     const scriptAlert = document.createElement("script");
     scriptAlert.type = "text/javascript";
 
-    // const textAlert = document.createTextNode(`console.log('hello!')`);
-    // scriptAlert.appendChild(textAlert);
-
     const head = document.getElementsByTagName("head")[0];
     head.appendChild(scriptAlert);
   }, []);
 
   return (
     <div className="App">
-      <br></br>
       <div>
-        <Alert sx={{ borderRadius: 1, mx: "auto", width: 400,textAlign: 'center', }} severity="success">
-          <AlertTitle >登録しました。</AlertTitle>
-          確認する — <strong>check it out!</strong>
+        <Alert sx={{ padding: 4,margin: 3,textAlign: 'center' }} severity="success">
+          <AlertTitle sx={{textAlign: 'center'}} >登録しました。</AlertTitle>
         </Alert>
       </div>
-
-      <div>Hello,</div>
+      <br></br>
     </div>
   );
 }

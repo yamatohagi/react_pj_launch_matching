@@ -26,7 +26,9 @@ SECRET_KEY = '-c1cg^-j%2l-e_-(0+ey030&yvz@^k$x@%w0pwgm#of%)qrqe+'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "https://lunch-matching.ibjapan.jp"
+    "https://lunch-matching.ibjapan.jp",
+    '127.0.0.1',
+    'http://localhost'
 ]
 
 

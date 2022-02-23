@@ -3,7 +3,7 @@ import './Slide.css'
 import { SignInButton } from "../../SignInButton";
 
 const Slide = (props) => {
-  const {title, subtitle, img, img2} = props.slide
+  const {title, subtitle, img, img2, textClass} = props.slide
   const {className} = props
   
   return (
@@ -15,13 +15,13 @@ const Slide = (props) => {
         </div>
       }
       <div className="slidecont">
-        <div className='slidetitles'>
+        <div className={`slidetitles ${textClass}`}>
           <h3>{subtitle}</h3>
           <h1>{title}</h1>
         </div>
         <SignInButton />
       </div>
-      <img src={img} alt=""/>
+      <img className="slidebackground" src={img} alt=""/>
     </div>
   )
 }
