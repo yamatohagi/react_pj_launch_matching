@@ -9,6 +9,7 @@ import { FullWidthTabs } from "./pages/Tabs"
 import Button from "react-bootstrap/Button";
 import Carousel from "./components/Carousel/Carousel"
 import "./styles/App.css";
+import ThemeConfig from './theme';
 
 /**
  * Renders information about the signed-in user or a button to retrieve data about the user
@@ -19,7 +20,7 @@ const ProfileContent = () => {
     useEffect(() => {
         RequestProfileData()
     }, []);
-    
+
 
     function RequestProfileData() {
         // Silently acquires an access token which is then attached to a request for MS Graph data
@@ -33,7 +34,7 @@ const ProfileContent = () => {
 
     return (
         <>
-            {graphData ? 
+            {graphData ?
                 <FullWidthTabs memberData={graphData}/>
                 // <MemberProfile memberData={graphData}/>
                 :
@@ -46,7 +47,7 @@ const ProfileContent = () => {
 /**
  * If a user is authenticated the ProfileContent component above is rendered. Otherwise a message indicating a user is not authenticated is rendered.
  */
-const MainContent = () => {    
+const MainContent = () => {
     return (
         <div className="App">
             <AuthenticatedTemplate>
@@ -62,8 +63,10 @@ const MainContent = () => {
 
 export default function App() {
     return (
+      <ThemeConfig>
         <PageLayout>
             <MainContent />
         </PageLayout>
+        </ThemeConfig>
     );
 }

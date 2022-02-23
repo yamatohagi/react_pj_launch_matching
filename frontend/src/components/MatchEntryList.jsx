@@ -1,74 +1,67 @@
 import React from "react";
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+// material
+import { Card, Table, Paper, TableHead, styled, TableRow, TableBody, TableCell, Container, tableCellClasses, TableContainer } from "@mui/material";
+// components
+import Label from "../components/Label";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.common.black,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 12,
   },
 }));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
+const dateFormat = (lunch_date) => {
+  const options = {
+    month: "short",
+    day: "numeric",
+    weekday: "short",
+  };
+  const date = new Date(lunch_date);
+  return date.toLocaleDateString("ja-JP", options);
+};
 
 function MatchEntryList({ matchEntry }) {
   const DisplayData = matchEntry.map((info, i) => {
+    const status = info.partner_mail ? "マッチ済" : "相手探し中";
     return (
-
-        <StyledTableRow key={i}>
-          <StyledTableCell component="th" scope="row">
-            {info.lunch_date}
-          </StyledTableCell>
-          <StyledTableCell align="right">{info.partner_name}</StyledTableCell>
-          <StyledTableCell align="right">{info.partner_dept}</StyledTableCell>
-        </StyledTableRow>
-
+      <TableRow key={i}>
+        <StyledTableCell align="center" sx="font-weight: bold;">
+          {dateFormat(info.lunch_date)}
+        </StyledTableCell>
+        <StyledTableCell align="center">{info.partner_name}</StyledTableCell>
+        <StyledTableCell align="center">{info.partner_dept}</StyledTableCell>
+        <StyledTableCell align="center">
+          <Label variant="ghost" color={"success"} color={(status === "マッチ済" && "success") || "error"}>
+            {(status === "マッチ済" && "済") || "未"}
+          </Label>
+        </StyledTableCell>
+      </TableRow>
     );
   });
 
   return (
-    <>
-      <TableContainer component={Paper}>
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>希望日</StyledTableCell>
-              <StyledTableCell>名前</StyledTableCell>
-              <StyledTableCell>部署</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{DisplayData}</TableBody>
+    <Container sx="padding-right: 0px;padding-left: 0px;">
+      <Card sx="margin-top: 5%">
+        <Table>
+          <TableContainer component={Paper}>
+            <Table aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell align="center">希望日</StyledTableCell>
+                  <StyledTableCell align="center">名前</StyledTableCell>
+                  <StyledTableCell align="center">部署</StyledTableCell>
+                  <StyledTableCell align="center">結果</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{DisplayData}</TableBody>
+            </Table>
+          </TableContainer>
         </Table>
-      </TableContainer>
-      {/* <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>希望日</th>
-            <th>名前</th>
-            <th>部署</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table> */}
-    </>
+      </Card>
+    </Container>
   );
 }
-
 export default MatchEntryList;

@@ -19,7 +19,7 @@ function TrueMatching() {
     <div className="App">
       <br></br>
       <div>
-        <Alert sx={{ borderRadius: 1, mx: "auto", width: 400,textAlign: 'center', }} severity="success">
+        <Alert sx={{ padding: 5,margin: 3,textAlign: 'center' }} severity="success">
           <AlertTitle >マッチング</AlertTitle>
           相手にメッセージを送ってみましょう — <strong>check it out!</strong>
         </Alert>

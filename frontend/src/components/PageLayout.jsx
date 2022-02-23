@@ -12,7 +12,7 @@ import { SignOutButton } from "./SignOutButton";
 
 /**
  * Renders the navbar component with a sign-in or sign-out button depending on whether or not a user is authenticated
- * @param props 
+ * @param props
  */
 export const PageLayout = (props) => {
     const isAuthenticated = useIsAuthenticated();
@@ -23,11 +23,11 @@ export const PageLayout = (props) => {
                 <>
                     <Navbar bg="primary" variant="dark">
                         <a className="navbar-brand" href="/">IBJ昼マッチ</a>
-                        <SignOutButton /> 
+                        <SignOutButton />
                     </Navbar>
                 </>
             : null }
-            
+
             {props.children}
         </>
     );
