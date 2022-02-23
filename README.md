@@ -12,7 +12,8 @@ pipenv shell
 ```
 pipenv install
 pip install django
-pip install python-dateutil 
+pip install python-dateutil
+pip install django-sslserver
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
