@@ -46,6 +46,26 @@
   color: #fff;
   box-shadow: 0 8px 16px 0 rgba(171, 0, 66, 0.24);
 }
+.css-ywcrpj-MuiTableCell-root {
+  padding-right: 0px;
+  padding-left: 0px
+
+}
+
+.css-wyncza-MuiTableCell-root {
+  padding-left: 0px;
+  padding-right: 10px;
+}
+
+.css-oycaqu-MuiTableCell-root {
+  padding-left: 0px;
+  padding-right: 10px
+}
+
+.css-acap47-MuiAlert-message {
+  text-align:center;
+ margin:0 auto;
+}
 .bg-primary {
   background-color: #1aa0ff!important;
 }
