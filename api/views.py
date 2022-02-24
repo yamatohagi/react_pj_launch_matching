@@ -100,11 +100,13 @@ def memberMatchList(request, pk):
 	for obj in entries:
 		if obj.partner_member_id is None:
 			data = {
+				'id': obj.id,
 				'lunch_date': obj.expected_date,
 			}
 		else:
 			if int(obj.member_id) == int(pk):
 				data = {
+					'id': obj.id,
 					'lunch_date': obj.expected_date,
 					'partner_mail': obj.partner_member_id.mail,
 					'partner_name': obj.partner_member_id.name,
@@ -113,6 +115,7 @@ def memberMatchList(request, pk):
 			else:
 				member = Member.objects.get(id=obj.member_id)
 				data = {
+					'id': obj.id,
 					'lunch_date': obj.expected_date,
 					'partner_mail': member.mail,
 					'partner_name': member.name,
@@ -123,7 +126,12 @@ def memberMatchList(request, pk):
 
 	return Response(entry_data)
 
-
-
-
+# -----------------------------------------------------------------
+# マッチ削除
+# -----------------------------------------------------------------
+@api_view(['DELETE'])
+def deleteMatch(request, pk):
+	task = MatchEntry.objects.get(id=pk)
+	task.delete()
+	return Response('Item succsesfully deleted!')
 	
