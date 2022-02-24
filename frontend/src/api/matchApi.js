@@ -27,3 +27,14 @@ export const matchingEntryList = (memberId) => {
   
    return fetch(url, requestOptions)
 }
+
+export const deleteMatch= (id) => {
+  const url = `${API_LINK}/api/delete-match/${id}/`;
+  
+  const requestOptions = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json", 'X-CSRFToken': getCookie('csrftoken') }
+  };
+  
+   return fetch(url, requestOptions)
+}

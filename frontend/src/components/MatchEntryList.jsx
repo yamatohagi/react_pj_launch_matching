@@ -3,6 +3,7 @@ import React from "react";
 import { Card, Table, Paper, TableHead, styled, TableRow, TableBody, TableCell, Container, tableCellClasses, TableContainer } from "@mui/material";
 // components
 import Label from "../components/Label";
+import UserMoreMenu from './UserMoreMenu';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -23,9 +24,12 @@ const dateFormat = (lunch_date) => {
   return date.toLocaleDateString("ja-JP", options);
 };
 
-function MatchEntryList({ matchEntry }) {
+function MatchEntryList({ matchEntry, deleteMatchEntry }) {
   const DisplayData = matchEntry.map((info, i) => {
     const status = info.partner_mail ? "済" : "未";
+    const handleMenuItemClick = () => {
+      deleteMatchEntry(info.id, status)
+    }
     return (
       <TableRow key={i}>
         <StyledTableCell align="center" sx="font-weight: bold;">
@@ -38,6 +42,7 @@ function MatchEntryList({ matchEntry }) {
             {status}
           </Label>
         </StyledTableCell>
+        <TableCell sx="width: 1px"><UserMoreMenu info={info} status={status} handleMenuItemClick={() => handleMenuItemClick()}/></TableCell>
       </TableRow>
     );
   });
@@ -54,6 +59,7 @@ function MatchEntryList({ matchEntry }) {
                   <StyledTableCell align="center">名前</StyledTableCell>
                   <StyledTableCell align="center">部署</StyledTableCell>
                   <StyledTableCell align="center">結果</StyledTableCell>
+                  <TableCell sx="width: 1px"></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>{DisplayData}</TableBody>

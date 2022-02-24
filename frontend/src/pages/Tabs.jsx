@@ -15,13 +15,15 @@ import ja from "date-fns/locale/ja";
 // material
 import { TextField, Button, Box, LinearProgress, Grid, Container, Card } from "@mui/material";
 import { setGetMember } from "../api/memberApi";
-import { newMatch, matchingEntryList } from "../api/matchApi";
+import { newMatch, matchingEntryList, deleteMatch } from "../api/matchApi";
 import { ProfileData } from "../components/ProfileData";
 import { MemberEdit } from "../components/MemberEdit";
 import MatchEntryList from "../components/MatchEntryList";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import Slide from '@mui/material/Slide';
+import Snackbar from '@mui/material/Snackbar';
 
 
 export const FullWidthTabs = ({ memberData }) => {
@@ -33,6 +35,7 @@ export const FullWidthTabs = ({ memberData }) => {
   const [editMember, setEditMember] = useState(false);
   const [matchTime, setMatchTime] = useState(new Date());
   const [matched, setMatched] = useState(false)
+  const [open, setOpen] = useState(false);
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   function TabPanel(props) {
@@ -57,7 +60,10 @@ export const FullWidthTabs = ({ memberData }) => {
 
 
   useEffect(() => {
+    initializedata()
+  }, [value]);
 
+  const initializedata = () => {
     try {
       setGetMember(memberData["displayName"], memberData["mail"])
         .then((response) => response.json())
@@ -77,7 +83,7 @@ export const FullWidthTabs = ({ memberData }) => {
     } catch {
       console.log("eroor");
     }
-  }, [value]);
+  }
 
   const handleEditButton = () => {
     setEditMember(!editMember);
@@ -104,6 +110,28 @@ export const FullWidthTabs = ({ memberData }) => {
 
   const handleChangeIndex = (index) => {
     setValue(index);
+  };
+
+  const deleteMatchEntry = (id, status) => {
+    console.log(status)
+    if (status == '済'){
+      setOpen(true)
+    } else {
+      try {
+        deleteMatch(id)
+          .then((response) => response.json())
+          .then(() => {
+            initializedata()
+          });
+      } catch {
+        console.log("eroor");
+      }
+    }
+    
+  }
+
+  const handleClose = () => {
+    setOpen(false)
   };
 
   return (
@@ -151,7 +179,7 @@ export const FullWidthTabs = ({ memberData }) => {
         </TabPanel>
 
         <TabPanel value={value} index={1} dir={theme.direction}>
-          {matchEntry ? <MatchEntryList matchEntry={matchEntry} /> : null}
+          {matchEntry ? <MatchEntryList matchEntry={matchEntry} deleteMatchEntry={(id, status) => deleteMatchEntry(id, status)}/> : null}
         </TabPanel>
 
         <TabPanel value={value} index={2} dir={theme.direction}>
@@ -164,6 +192,13 @@ export const FullWidthTabs = ({ memberData }) => {
           </Container>
         </TabPanel>
       </SwipeableViews>
+      <Snackbar
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Slide}
+        message="マッチ済なので削除できません"
+        key={Slide.name}
+      />
     </Box>
   );
 };
