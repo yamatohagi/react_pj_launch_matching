@@ -48,7 +48,7 @@
 }
 .css-ywcrpj-MuiTableCell-root {
   padding-right: 0px;
-  padding-left: 0px
+  padding-left: 10px
 
 }
 
@@ -56,9 +56,11 @@
   padding-left: 0px;
   padding-right: 10px;
 }
-
-.css-oycaqu-MuiTableCell-root {
+.css-yjcdyq-MuiTableCell-root {
   padding-left: 0px;
+}
+.css-oycaqu-MuiTableCell-root {
+  padding-left: 10px;
   padding-right: 10px
 }
 
